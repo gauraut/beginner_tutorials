@@ -19,7 +19,7 @@ catkin_make clean && catkin_make
 ### Copy the repository in src folder of catkin workspace
 ```
 cd src 
-git clone https://github.com/advaitp/beginner_tutorials.git
+git clone https://github.com/gauraut/beginner_tutorials.git
 cd ..
 catkin_make clean && catkin_make
 source ./devel/setup.bash
@@ -38,9 +38,9 @@ source ./devel/setup.bash
 ```
 ### To run the publisher node
 ```
-rosrun beginner_tutorials publisher
+rosrun beginner_tutorials talker
 ```
 ### To run the subscriber node
 ```
-rosrun beginner_tutorials subscriber
+rosrun beginner_tutorials listener
 ```
