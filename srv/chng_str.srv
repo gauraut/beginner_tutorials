@@ -1,2 +1,3 @@
-string ip
-strip hw
+string ip_str
+---
+string op_str
