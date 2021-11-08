@@ -1,0 +1,12 @@
+<launch>
+<node
+pkg="beginner_tutorials"
+type="talker"
+name="talker"
+args="-pub_rate"
+/>
+<node
+pkg="beginner_tutorials" type="listener"
+name="listener"
+/>
+</launch>

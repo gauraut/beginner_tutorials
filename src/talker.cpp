@@ -9,13 +9,13 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/chng_str.h"
-extern std::string op_str = "Hello, this is Gaurav.";
+extern std::string str = "Hello, this is Gaurav.";
 
 
 bool chng_str(beginner_tutorials::chng_str::Request  &req,
          beginner_tutorials::chng_str::Response &res) {
   res.op_str = req.ip_str;
-  op_str = res.hw;
+  str = res.op_str;
   return true;
 }
 
@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
   ros::ServiceServer service = n.advertiseService("chng_str", chng_str);
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(argc);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << op_str << count;
+    ss << str << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
