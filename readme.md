@@ -71,6 +71,10 @@ rosrun beginner_tutorials listener
 ```
 roslaunch beginner_tutorials week10.launch pub_rate:=15 # Can set pub_rate to any required integer
 ```
+### Call rosservice
+```
+rosservice call /chng_str "your string here"
+```
 ### To run rqt console and rqt logging
   - In separate terminal
 ```
