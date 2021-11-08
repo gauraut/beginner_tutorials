@@ -2,9 +2,10 @@
 <node
 pkg="beginner_tutorials"
 type="talker"
-name="talker"
-args="-pub_rate"
-/>
+name="talker" 
+args = "-pub_rate">
+<param name="pub_rate" value="$(arg pub_rate)" />
+</node>
 <node
 pkg="beginner_tutorials" type="listener"
 name="listener"

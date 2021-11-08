@@ -41,6 +41,9 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
+  int pub_rate;
+  n.getParam("/talker/pub_rate", pub_rate);
+  ROS_INFO("Got parameter : %d", pub_rate);
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
@@ -60,7 +63,7 @@ int main(int argc, char **argv) {
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
   ros::ServiceServer service = n.advertiseService("chng_str", chng_str);
-  ros::Rate loop_rate(argc);
+  ros::Rate loop_rate(pub_rate);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -75,7 +78,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << str << count;
+    ss << str << pub_rate;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
