@@ -59,14 +59,21 @@ int main(int argc, char **argv) {
    * a unique string for each message.
    */
   int count = 0;
+
   while (ros::ok()) {
+    std::string hw = "Hello, this is Gaurav.";
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
+    /*if (ros::service::call("chng_str", std::string ip)) {
+      ROS_INFO("Enter string");
+      
+      hw = ip;
+    }*/
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Hello, this is Gaurav." << count;
+    ss << hw << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());

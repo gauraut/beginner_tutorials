@@ -6,7 +6,10 @@ project(beginner_tutorials)
 ## Find catkin and any catkin packages
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)
 
-
+add_service_files(
+  FILES
+  chng_str.srv
+)
 ## Generate added messages and services
 generate_messages(DEPENDENCIES std_msgs)
 
@@ -23,3 +26,14 @@ add_dependencies(talker beginner_tutorials_generate_messages_cpp)
 add_executable(listener src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
 add_dependencies(listener beginner_tutorials_generate_messages_cpp)
+
+add_executable(chng_str_server src/chng_str_server.cpp)
+target_link_libraries(chng_str_server ${catkin_LIBRARIES})
+add_dependencies(chng_str_server beginner_tutorials_gencpp)
+
+add_executable(chng_str_server src/chng_str_server.cpp)
+target_link_libraries(chng_str_server ${catkin_LIBRARIES})
+add_dependencies(chng_str_server beginner_tutorials_gencpp)
+
+
+
