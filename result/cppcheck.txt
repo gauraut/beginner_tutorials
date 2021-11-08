@@ -1,5 +1,3 @@
 src/listener.cpp:54:23: style: Variable 'sub' is assigned a value that is never used. [unreadVariable]
   ros::Subscriber sub = n.subscribe("chatter", 1000, chatterCallback);
                       ^
-
-

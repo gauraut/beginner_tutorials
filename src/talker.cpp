@@ -11,7 +11,16 @@
 #include "beginner_tutorials/chng_str.h"
 extern std::string str = "Hello, this is Gaurav.";
 
-
+/// @fn bool chng_str(beginner_tutorials::chng_str::Request&,
+///  beginner_tutorials::chng_str::Response&)
+/// @brief The chng_str function which is used by
+///  the service chng_str to change the base string
+///
+/// @pre
+/// @post
+/// @param req
+/// @param res
+/// @return
 bool chng_str(beginner_tutorials::chng_str::Request  &req,
          beginner_tutorials::chng_str::Response &res) {
   res.op_str = req.ip_str;
@@ -20,9 +29,15 @@ bool chng_str(beginner_tutorials::chng_str::Request  &req,
   return true;
 }
 
-/**
- * This tutorial demonstrates simple sending of messages over the ROS system.
- */
+/// @fn int main(int, char**)
+/// @brief This tutorial demonstrates simple
+/// sending of messages over the ROS system.
+///
+/// @pre
+/// @post
+/// @param argc
+/// @param argv
+/// @return
 int main(int argc, char **argv) {
   /**
    * The ros::init() function needs to see argc and argv so that it can perform
@@ -44,9 +59,10 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
   int pub_rate = 10;
   n.getParam("/talker/pub_rate", pub_rate);
-  ROS_FATAL_STREAM("If " << pub_rate << " is equal to zero, then no messages will be transmitted.");
+  ROS_FATAL_STREAM("If " << pub_rate << " is"
+      " equal to zero, then no messages will be transmitted.");
   ROS_INFO_STREAM("Got parameter : " << pub_rate);
-  ROS_DEBUG_STREAM(pub_rate << " is the current pub_rate"); 
+  ROS_DEBUG_STREAM(pub_rate << " is the current pub_rate");
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
