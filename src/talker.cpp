@@ -9,8 +9,9 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/chng_str.h"
+#include <tf/transform_broadcaster.h>
 extern std::string str = "Hello, this is Gaurav.";
-
+extern std::string tlk = "talker";
 /// @fn bool chng_str(beginner_tutorials::chng_str::Request&,
 ///  beginner_tutorials::chng_str::Response&)
 /// @brief The chng_str function which is used by
@@ -28,6 +29,7 @@ bool chng_str(beginner_tutorials::chng_str::Request  &req,
   ROS_WARN_STREAM(str << " is now " << res.op_str);
   return true;
 }
+
 
 /// @fn int main(int, char**)
 /// @brief This tutorial demonstrates simple
@@ -83,7 +85,9 @@ int main(int argc, char **argv) {
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
   ros::ServiceServer service = n.advertiseService("chng_str", chng_str);
   ros::Rate loop_rate(pub_rate);
-
+  
+  static tf::TransformBroadcaster talk;
+  tf::Transform transform;
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
@@ -99,9 +103,13 @@ int main(int argc, char **argv) {
     std::stringstream ss;
     ss << str << count;
     msg.data = ss.str();
-
     ROS_DEBUG_STREAM("" << msg.data.c_str());
-
+    transform.setOrigin( tf::Vector3(20, 45, 0.0) );
+    tf::Quaternion q;
+    q.setRPY(0, 0, 3.14);
+    transform.setRotation(q);
+    talk.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world",
+    tlk));
     /**
      * The publish() function is how you send messages. The parameter
      * is the message object. The type of this object must agree with the type
