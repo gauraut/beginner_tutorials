@@ -94,4 +94,44 @@ OR
 ```
 rostest -t beginner_tutorials test.launch
 ```
+## Bag files
+### Recording with the launch file
+```
+roslaunch beginner_tutorials week10.launch record_talker:=true #by defalt, is set to false
+```
+The rosbag will be saved in the package's launch folder with th name as "sample.bag"
+### Disabling bag file recording
+By default, the rosbag recording is disabled. Just run the launch file.
+### Inspecting the bag file
+```
+rosbag info your_rosbag_file.bag
+```
+Example output:
+```
+path:        2021-11-14-21-16-20.bag
+version:     2.0
+duration:    18.3s
+start:       Nov 14 2021 21:16:20.10 (1636942580.10)
+end:         Nov 14 2021 21:16:38.43 (1636942598.43)
+size:        94.6 KB
+messages:    542
+compression: none [1/1 chunks]
+types:       rosgraph_msgs/Log [acffd30cd6b6de30f120938c17c593fb]
+             std_msgs/String   [992ce8a1687cec8c8bd883ec73ca41d1]
+topics:      /chatter   271 msgs    : std_msgs/String  
+             rosout     271 msgs    : rosgraph_msgs/Log (2 connections)
 
+```
+### Playing the recorded rosbag file with listener node demonstration
+In a new terminal
+```
+roscore
+```
+On a separate terminal
+```
+rosbag play file_name.bag
+```
+On a new terminal
+```
+rosrun beginner_tutorials listener
+```

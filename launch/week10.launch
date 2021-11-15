@@ -11,5 +11,7 @@ name="talker" >
 pkg="beginner_tutorials" type="listener"
 name="listener"
 />
-<node pkg="rosbag" type="record" name="rosbag_record_talker" args="record -o /talker/chatter" if="$(arg record_talker)" />
+<node pkg="rosbag" type="record" name="rosbag_record_talker"
+args="record -O $(find beginner_tutorials)/launch/sample.bag /chatter /rosout /rosout_agg /tf"
+if="$(arg record_talker)" />
 </launch>
