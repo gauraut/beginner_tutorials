@@ -84,3 +84,14 @@ rosrun rqt_console rqt_console
 ```
 rosrun rqt_logger_level rqt_logger_level
 ```
+### Run rostest
+```
+roscd
+cd ..
+catkin_make run_tests
+```
+OR
+```
+rostest -t beginner_tutorials test.launch
+```
+

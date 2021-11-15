@@ -1,13 +1,15 @@
 <launch>
+<arg name="record_talker" default="false" />
+<arg name="pub_rate" default="15" />
 <node
 pkg="beginner_tutorials"
 type="talker"
-name="talker" 
-args = "-pub_rate">
+name="talker" >
 <param name="pub_rate" value="$(arg pub_rate)" />
 </node>
 <node
 pkg="beginner_tutorials" type="listener"
 name="listener"
 />
+<node pkg="rosbag" type="record" name="rosbag_record_talker" args="record -o /talker/chatter" if="$(arg record_talker)" />
 </launch>
