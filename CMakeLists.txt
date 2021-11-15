@@ -9,12 +9,14 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation tf)
 
 add_service_files(
+  DIRECTORY
+  srv
   FILES
   chng_str.srv
 )
 generate_messages(DEPENDENCIES std_msgs)
 ## Declare a catkin package
-catkin_package(CATKIN_DEPENDS message_runtime)
+catkin_package(CATKIN_DEPENDS std_msgs message_runtime)
 
 
 ## Build talker and listener
@@ -28,12 +30,31 @@ add_executable(listener src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
 add_dependencies(listener beginner_tutorials_generate_messages_cpp)
 
-find_package(rostest REQUIRED)
-find_package(gtest)
+target_link_libraries(
+  talker
+  ${catkin_LIBRARIES}
+)
+add_dependencies(
+  talker
+  ${beginner_tutorials_EXPORTED_TARGETS}
+)
 
-add_rostest_gtest(Talker_test launch/test.launch test/Talker_test.cpp)
-target_link_libraries(Talker_test ${catkin_LIBRARIES} ${GTEST_LIBRARIES})
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
 
-if (CATKIN_ENABLE_TESTING)
-catkin_add_gtest(beginner_tutorials test/Talker_test.cpp)
+  add_rostest_gtest(
+  talker_test
+  launch/test.launch
+  test/talker_test.cpp
+  )
+  target_link_libraries(
+  talker_test
+  ${catkin_LIBRARIES}
+  )
+  add_dependencies(
+  talker_test
+  talker
+  ${PROJECT_NAME}_generate_messages_cpp
+  ${catkin_EXPORTED_TARGETS}
+  )
 endif()

@@ -1,3 +1,10 @@
+<?xml version="1.0"?>
 <launch>
- <test test-name="Talker_test" pkg="beginner_tutorials" type="Talker_test" />
+<node
+  pkg="beginner_tutorials"
+  type="talker"
+  name="talker" >
+  <param name="pub_rate" value = "15" />
+</node>
+  <test pkg="beginner_tutorials" test-name="talker_test" type="talker_test" />
 </launch>
